@@ -1,0 +1,315 @@
+public class PersonApp {
+	
+	  public static Scanner sc = new Scanner(System.in);
+
+	    // Force the user to enter a non empty value
+	   public static String getNonEmptyValue(String prompt) {
+	        while (true) {
+	            System.out.print(prompt);
+	            String value = sc.nextLine().trim();
+
+	            if (!value.isEmpty()) {
+	                return value;
+	            }
+
+	            System.out.println("Error: Empty field is not allowed.");
+	        }
+	    }
+
+	    // Force user to enter a valid name (first/last)
+	    public static String getName(String prompt) {
+	        while (true) {
+	            String name = getNonEmptyValue(prompt);
+
+	            // Check that name are all characters
+	            boolean allChars = true;
+
+	            for (int i = 0; i < name.length(); i++) {
+	                if ((name.charAt(i) >= 'a' && name.charAt(i) <= 'z')
+	                        || name.charAt(i) >= 'A' && name.charAt(i) <= 'Z') {
+	                    // Good
+	                } else {
+	                    allChars = false;
+	                    break;
+	                }
+	            }
+
+	            if (allChars) {
+	                return name;
+	            }
+
+	            System.out.println("Error: Only alphabets A to Z is allowed.");
+	        }
+	    }
+
+	    // Force user to enter a valid course
+	     public static String getCourse(String prompt) {
+	        while (true) {
+	            String course = getNonEmptyValue(prompt);
+
+	            if (course.length() != 6) {
+	                System.out.println("Error: Course should be 6 characters long.");
+	                continue;
+	            }
+
+	            // First 3 chars are characters
+	            boolean isValid = true;
+	            int i = 0;
+
+	            for (; i < 3; i++) {
+	                if ((course.charAt(i) >= 'a' && course.charAt(i) <= 'z')
+	                        || (course.charAt(i) >= 'A' && course.charAt(i) <= 'Z')) {
+	                    // Good
+	                } else {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: First 3 characters of course should be alphabets.");
+	                continue;
+	            }
+
+	            // Next 3 chars are digits
+	            for (; i < course.length(); i++) {
+	                if (course.charAt(i) >= '0' && course.charAt(i) <= '9') {
+	                    // Good
+	                } else {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: Last 3 characters of course should be digits.");
+	                continue;
+	            }
+
+	            return course;
+	        }
+	    }
+
+	    // Force user to enter a student number
+	     public static String getStudentNumber(String prompt) {
+	        while (true) {
+	            String studentNumber = getNonEmptyValue(prompt);
+
+	            if (studentNumber.length() != 5) {
+	                System.out.println("Error: Course should be 5 characters long.");
+	                continue;
+	            }
+
+	            // First 1 char is characters
+	            int i = 0;
+
+	            if ((studentNumber.charAt(i) >= 'a' && studentNumber.charAt(i) <= 'z')
+	                    || (studentNumber.charAt(i) >= 'A' && studentNumber.charAt(i) <= 'Z')) {
+	                // Good
+	            } else {
+	                System.out.println("Error: First characters of Student number should be an alphabet.");
+	                continue;
+	            }
+
+	            // Next 4 chars are digits
+	            boolean isValid = true;
+	            i++;
+
+	            for (; i < studentNumber.length(); i++) {
+	                if (studentNumber.charAt(i) >= '0' && studentNumber.charAt(i) <= '9') {
+	                    // Good
+	                } else {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: Last 4 characters of Student number should be digits.");
+	                continue;
+	            }
+
+	            return studentNumber;
+	        }
+	    }
+
+	    // Force user to enter a valid staff ID
+	     public static String getStaffID(String prompt) {
+	        while (true) {
+	            String staffID = getNonEmptyValue(prompt);
+
+	            if (staffID.length() != 7) {
+	                System.out.println("Error: Course should be 7 characters long.");
+	                continue;
+	            }
+	            // First 3 chars are characters
+	            boolean isValid = true;
+	            int i = 0;
+
+	            for (; i < 3; i++) {
+	                if ((staffID.charAt(i) >= 'a' && staffID.charAt(i) <= 'z')
+	                        || (staffID.charAt(i) >= 'A' && staffID.charAt(i) <= 'Z')) {
+	                    // Good
+	                } else {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: First 3 characters of Staff ID should be alphabets.");
+	                continue;
+	            }
+
+	            // Next 4 chars are digits
+	            for (; i < staffID.length(); i++) {
+	                if (staffID.charAt(i) >= '0' && staffID.charAt(i) <= '9') {
+	                    // Good
+	                } else {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: Last 4 characters of Staff ID should be digits.");
+	                continue;
+	            }
+
+	            return staffID;
+	        }
+	    }
+
+	    // Force user to enter a valid PPS number
+	     public static String getPPSNumber(String prompt) {
+	        while (true) {
+	            String pps = getNonEmptyValue(prompt);
+
+	            if (pps.length() != 11) {
+	                System.out.println("Error: PPS Number should be 11 characters long in the format 000-00-0000.");
+	                continue;
+	            }
+
+	            // First 3 digits should be a number
+	            boolean isValid = true;
+	            int i = 0;
+
+	            for (; i < 3; i++) {
+	                if (pps.charAt(i) < '0' || pps.charAt(i) > '9') {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: Invalid format. It should be in the form of 000-00-0000.");
+	                continue;
+	            }
+
+	            // Next char is a '-'
+	            if (pps.charAt(i) != '-') {
+	                System.out.println("Error: Invalid format. It should be in the form of 000-00-0000.");
+	                continue;
+	            }
+
+	            // Next 2 digit should be a number
+	            for (i++; i < 3; i++) {
+	                if (pps.charAt(i) < '0' || pps.charAt(i) > '9') {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: Invalid format. It should be in the form of 000-00-0000.");
+	                continue;
+	            }
+
+	            // Next char is a '-'
+	            if (pps.charAt(i) != '-') {
+	                System.out.println("Error: Invalid format. It should be in the form of 000-00-0000.");
+	                continue;
+	            }
+
+	            // The rest are digits
+	            for (i++; i < pps.length(); i++) {
+	                if (pps.charAt(i) < '0' || pps.charAt(i) > '9') {
+	                    isValid = false;
+	                    break;
+	                }
+	            }
+
+	            if (!isValid) {
+	                System.out.println("Error: Invalid format. It should be in the form of 000-00-0000.");
+	                continue;
+	            }
+
+	            return pps;
+	        }
+	    }
+
+	    public static void main(String args[]) {
+	        // display a welcome message
+	        System.out.println("Welcome to the Person Tester application");
+	        System.out.println();
+
+	        // perform 1 or more selections
+	        String choice = "y";
+
+	        while (choice.equalsIgnoreCase("y")) {
+	            System.out.print("Create student, staff or contractor? (s/sf/c): ");
+	            String PersonCode = sc.nextLine();  // read the product code
+
+	            // get the Product object
+	            Person p = PersonDB.getDisplayText(PersonCode);
+
+	            if (PersonCode.equalsIgnoreCase("s")) {
+
+	                Student S = new Student();
+	                S.setFirstName(getName("Enter first name: "));
+	                S.setLastName(getName("Enter last name: "));
+	                S.setEmail(getNonEmptyValue("Enter email address: "));
+	                S.setcourse(getCourse("Student course: "));
+	                S.setStudentnumber(getStudentNumber("Student number: "));
+	                p = S;
+	                //display the output.   
+	                System.out.println();
+	                System.out.println("\nYou Entered:" + "\n" + S.getDisplayText() + "\n");
+	            } else if (PersonCode.equalsIgnoreCase("sf")) {
+	                Staff ST = new Staff();
+	                ST.setFirstName(getName("Enter first name: "));
+	                ST.setLastName(getName("Enter last name: "));
+	                ST.setEmail(getNonEmptyValue("Enter email address: "));
+	                ST.setStaff_id(getStaffID("Staff ID number: "));
+	                p = ST;
+
+	                //display the output.   
+	                System.out.println();
+	                System.out.println("\nYou Entered:" + "\n" + ST.getDisplayText() + "\n");
+	            } else if (PersonCode.equalsIgnoreCase("c")) {
+	                Contractor C = new Contractor();
+	                C.setFirstName(getName("Enter first name: "));
+	                C.setLastName(getName("Enter last name: "));
+	                C.setEmail(getNonEmptyValue("Enter email address: "));
+	                C.setPPS_No(getPPSNumber("PPS number: "));
+	                p = C;
+
+	                //display the output.   
+	                System.out.println();
+	                System.out.println("\nYou Entered:" + "\n" + C.getDisplayText() + "\n");
+
+	                //if the user does not enter the code.			         
+	            } else {
+	                System.out.println();
+	                System.out.println("You have to enter code c or s or sf " + "\n");
+	            }
+
+	            // see if the user wants to continue
+	            System.out.print("Continue? (y/n): ");
+	            choice = sc.nextLine();
+	            System.out.println();
+	        }
+
+	        sc.close();
+	    }
+	}
