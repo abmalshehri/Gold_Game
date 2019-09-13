@@ -1,0 +1,25 @@
+
+public class PlayerTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+	@Test
+	public void testGetScore() {
+		//fail("Not yet implemented");
+	        Player player = new Player("Player");
+
+	        // Player should start with 0 score
+	        assertEquals(0, player.getScore());
+
+	        // Player gets points added
+	        player.addScore(1);
+	        assertEquals(1, player.getScore());
+	    }
+		
+	}
+

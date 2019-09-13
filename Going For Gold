@@ -1,0 +1,133 @@
+public class GoingForGold {
+
+	   int MAX_QUESTIONS = 10;
+	   int SCORE_PER_QUESTION = 1;
+	   int MAX_CHOICES = 4;
+	   String TRIVIA_FILENAME = "trivia.txt";
+
+	   Question[] questions;
+	   Player player1;
+	   Player player2;
+	   Scanner in = new Scanner(System.in);
+
+	   
+	    public GoingForGold() {
+	        player1 = new Player("Player 1");
+	        player2 = new Player("Player 2");
+
+	        loadQuestions();
+	    }
+
+	    public void loadQuestions() {
+	        // We expect 10 questions only
+	        questions = new Question[MAX_QUESTIONS];
+
+	        try {
+	            // Open the file
+	            Scanner inFile = new Scanner(new File(TRIVIA_FILENAME));
+
+	            // Read 10 questions
+	            for (int i = 0; i < MAX_QUESTIONS; i++) {
+	                String questionDescription = inFile.nextLine();
+
+	                // Expect 4 choices for every question
+	                String[] choices = new String[MAX_CHOICES];
+
+	                for (int j = 0; j < MAX_CHOICES; j++) {
+	                    choices[j] = inFile.nextLine();
+	                }
+
+	                // Get the correct choice number
+	                int correctChoice = Integer.parseInt(inFile.nextLine());
+
+	                // Build the question and add it to the list of questions
+	                questions[i] = new Question(questionDescription, choices, correctChoice);
+	            }
+
+	            // Done.
+	            inFile.close();
+	        } catch (Exception e) {
+	            System.out.println("Error: " + e.getMessage());
+	            System.exit(0);
+	        }
+	    }
+	 
+	    public int readChoice() {
+	        while (true) {
+	            System.out.print("Choice: ");
+	            String line = in.nextLine();
+
+	            // Make sure choice is a number
+	            try {
+	                int value = Integer.parseInt(line);
+
+	                // Make sure choice is between 1 and 4
+	                if (value >= 1 && value <= 4) {
+	                    return value;
+	                }
+
+	                System.out.println("Error: Please enter a value between 1 and 4 only.");
+	            } catch (Exception e) {
+	                System.out.println("Error: Please enter a numeric value.");
+	            }
+	        }
+	    }
+
+	  
+	    //Allow a player to play
+	
+	    public void play(Player player) {
+	        System.out.println(player.getName() + " it is your turn to play."+"\n"+
+	    "--------------------------------");
+
+	        // Display each and every question for the player to answer
+	        for (int i = 0; i < MAX_QUESTIONS; i++) {
+	            Question question = questions[i];
+	            question.printQuestion();
+	            int choice = readChoice();
+
+	            // Score the user based on the correctness of choice
+	            if (question.validateChoice(choice)) {
+	                System.out.println("Correct!");
+	                player.addScore(SCORE_PER_QUESTION);
+	            } else {
+	                System.out.println("Incorrect.");
+	            }
+	        }
+
+	        // When done display the player's score
+	        System.out.println("Okay " + player.getName() + ", you got " + player.getScore() + " score point(s)."+"\n"
+	        +"___________________________________________________________");
+	    }
+
+	    
+	     //Start the game
+	  
+	    public void run() {
+	        // Start with player 1
+	        play(player1);
+
+	        System.out.println();
+
+	        // Next player 2 will play
+	        play(player2);
+
+	        // Display the winner
+	        System.out.println();
+
+	        if (player1.getScore() > player2.getScore()) {
+	            System.out.println(player1.getName() + " win.");
+	        } else if (player1.getScore() < player2.getScore()) {
+	            System.out.println(player2.getName() + " win.");
+	        } else {
+	            System.out.println("It's a tie.");
+	        }
+	    }
+	    
+	    //Entry point of the program that starts the game
+	
+	    public static void main(String[] args) {
+	    	GoingForGold game = new GoingForGold();
+	        game.run();
+	    }
+}

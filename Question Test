@@ -1,0 +1,35 @@
+public class QuestionTest {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testValidateChoice() {
+		//fail("Not yet implemented");
+		
+		        Question question = new Question("Question", new String[]{"A", "B", "C", "D"}, 1);
+
+		        // Test for valid choice
+		        assertTrue(question.validateChoice(1));
+
+	}
+	
+
+    public void testGetChoices() {
+        Question question = new Question("Question", new String[]{"A", "B", "C", "D"}, 1);
+        String[] choices = question.getChoices();
+
+        assertEquals(4, choices.length);
+        assertEquals("A", choices[0]);
+        assertEquals("B", choices[1]);
+        assertEquals("C", choices[2]);
+        assertEquals("D", choices[3]);
+    }
+
+
+}

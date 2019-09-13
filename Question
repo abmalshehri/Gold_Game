@@ -1,0 +1,54 @@
+public class Question {
+	
+     String question;
+     String[] choices;
+     int correctChoice;
+
+
+    public Question(String question, String[] choices, int correctChoice) {
+        this.question = question;
+        this.choices = choices;
+        this.correctChoice = correctChoice;
+    }
+
+
+     //Display the question and the choices
+  
+    public void printQuestion() {
+        System.out.println(question);
+
+        for (int i = 0; i < choices.length; i++) {
+            System.out.println("    " + (i + 1) + ". " + choices[i]);
+        }
+    }
+
+  
+     // choiceNumber Choice number to validate True if choice number is correct, otherwise false
+
+    public boolean validateChoice(int choiceNumber) {
+        return correctChoice == choiceNumber;
+    }
+
+ 
+     //Get the question 
+    public String getQuestion() {
+        return question;
+    }
+
+
+    public String[] getChoices() {
+        // Return a copy of the choices
+        String[] theChoices = new String[choices.length];
+
+        for (int i = 0; i < theChoices.length; i++) {
+            theChoices[i] = choices[i];
+        }
+
+        return theChoices;
+    }
+
+
+    public int getCorrectChoice() {
+        return correctChoice;
+    }
+}

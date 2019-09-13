@@ -1,0 +1,31 @@
+
+public class Player {
+	
+    String name;
+    int score;
+
+  
+     //Create a new player
+
+    public Player(String name) {
+        this.name = name;
+        score = 0;
+    }
+
+    //score Points
+
+    public void addScore(int score) {
+        this.score += score;
+    }
+
+     //Player name
+    public String getName() {
+        return name;
+    }
+    
+     //Get the player's score and return 
+     
+    public int getScore() {
+        return score;
+    }
+}
